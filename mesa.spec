@@ -51,13 +51,15 @@
 
 %global vulkan_drivers swrast%{?base_vulkan}%{?platform_vulkan}
 
-Name:           mesa
-Summary:        Mesa graphics libraries
-%global ver 22.2.0-full
+Name:           mesa-full
+Summary:        Mesa graphics libraries (patched to include all codecs again)
+%global ver 22.2.0-full-codecs
 Version:        %{lua:ver = string.gsub(rpm.expand("%{ver}"), "-", "~"); print(ver)}
 Release:        %autorelease
 License:        MIT
 URL:            http://www.mesa3d.org
+
+Conflicts: mesa <= 22.2.0
 
 Source0:        https://archive.mesa3d.org/mesa-%{ver}.tar.xz
 # src/gallium/auxiliary/postprocess/pp_mlaa* have an ... interestingly worded license.
