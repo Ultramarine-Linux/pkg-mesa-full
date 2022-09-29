@@ -51,13 +51,16 @@
 
 %global vulkan_drivers swrast%{?base_vulkan}%{?platform_vulkan}
 
-Name:           mesa
-Summary:        Mesa graphics libraries
-%global ver 22.1.7
+Name:           mesa-full
+Summary:        Mesa graphics libraries (patched to include all codecs again)
+%global ver 22.1.7-full
 Version:        %{lua:ver = string.gsub(rpm.expand("%{ver}"), "-", "~"); print(ver)}
 Release:        %autorelease
 License:        MIT
 URL:            http://www.mesa3d.org
+
+Provides: mesa
+Conflicts: mesa <= 22.1.7
 
 Source0:        https://archive.mesa3d.org/mesa-%{ver}.tar.xz
 # src/gallium/auxiliary/postprocess/pp_mlaa* have an ... interestingly worded license.
@@ -344,6 +347,7 @@ cp %{SOURCE1} docs/
   -Dgallium-opencl=%{?with_opencl:icd}%{!?with_opencl:disabled} \
   -Dvulkan-drivers=%{?vulkan_drivers} \
   -Dvulkan-layers=device-select \
+  -Dvideo-codecs=h264dec,h264enc,h265dec,h265enc,vc1dec \
   -Dshared-glapi=enabled \
   -Dgles1=disabled \
   -Dgles2=enabled \
