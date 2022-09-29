@@ -53,12 +53,13 @@
 
 Name:           mesa-full
 Summary:        Mesa graphics libraries (patched to include all codecs again)
-%global ver 22.2.0-full-codecs
+%global ver 22.2.0-full
 Version:        %{lua:ver = string.gsub(rpm.expand("%{ver}"), "-", "~"); print(ver)}
 Release:        %autorelease
 License:        MIT
 URL:            http://www.mesa3d.org
 
+Provides: mesa
 Conflicts: mesa <= 22.2.0
 
 Source0:        https://archive.mesa3d.org/mesa-%{ver}.tar.xz
