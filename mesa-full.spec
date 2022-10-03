@@ -53,9 +53,9 @@
 
 Name:           mesa-full
 Summary:        Mesa graphics libraries (patched to include all codecs again)
-%global ver 22.2.0-full
+%global ver 22.2.0
 Version:        %{lua:ver = string.gsub(rpm.expand("%{ver}"), "-", "~"); print(ver)}
-Release:        %autorelease
+Release:        1%{?dist}
 License:        MIT
 URL:            http://www.mesa3d.org
 
@@ -336,7 +336,7 @@ Obsoletes:      mesa-vulkan-devel < %{?epoch:%{epoch}:}%{version}-%{release}
 The drivers with support for the Vulkan API.
 
 %prep
-%autosetup -n %{name}-%{ver} -p1
+%autosetup -n mesa-%{ver} -p1
 cp %{SOURCE1} docs/
 
 %build
